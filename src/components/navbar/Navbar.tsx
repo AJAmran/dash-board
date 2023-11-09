@@ -6,7 +6,6 @@ import {
   AiOutlineFileSearch,
 } from "react-icons/ai";
 import { IoMdNotifications } from "react-icons/io";
-import { BiSolidUserCircle } from "react-icons/bi";
 
 const Navbar = () => {
   return (
@@ -22,7 +21,7 @@ const Navbar = () => {
         <span>AdminHub</span>
       </div>
       <div className="icons">
-        <AiOutlineFileSearch  className="icon"/>
+        <AiOutlineFileSearch className="icon" />
         <AiFillAppstore className="icon" />
         <AiOutlineExpand className="icon" />
         <div className="notification">
