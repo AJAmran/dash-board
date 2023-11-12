@@ -1,18 +1,21 @@
 import { Link } from "react-router-dom";
+import { menu } from "../../utils/data/Data";
 import "./menu.scss";
-import { FaHome } from "react-icons/fa";
 
 const Menu = () => {
-  return (
-    <div className="menu">
-      <div className="item">
-        <span className="title">Main</span>
-        <Link to="/">
-          <FaHome />
-        </Link>
+  return <div className="menu">
+    {menu.map((item) =>(
+      <div className="item" key={item.id}>
+        <span className="title">{item.title}</span>
+        {item.listItems.map((listItem)=>(
+          <Link to={listItem.url} className="listItem" key={listItem.id}>
+            <img src={listItem.icon} alt="" />
+            <span>{listItem.title}</span>
+          </Link>
+        ))}
       </div>
-    </div>
-  );
+    ))}
+  </div>;
 };
 
 export default Menu;
