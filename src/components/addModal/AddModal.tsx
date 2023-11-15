@@ -33,7 +33,7 @@ const AddModal = (props: Props) => {
                 <input type={column.type} placeholder={column.field} />
               </div>
             ))}
-          <button>Send</button>
+          <button>Add</button>
         </form>
       </div>
     </div>

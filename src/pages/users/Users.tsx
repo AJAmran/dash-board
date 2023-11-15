@@ -16,29 +16,40 @@ const columns: GridColDef[] = [
     },
   },
   {
-    field: "status",
-    headerName: "Status",
-    width: 100,
-    type: "boolean",
-  },
-  {
     field: "firstName",
+    type: "string",
     headerName: "First name",
     width: 150,
-    editable: true,
   },
   {
     field: "lastName",
+    type: "string",
     headerName: "Last name",
     width: 150,
-    editable: true,
   },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 110,
-    editable: true,
+    field: "email",
+    type: "string",
+    headerName: "Email",
+    width: 200,
+  },
+  {
+    field: "phone",
+    type: "string",
+    headerName: "Phone",
+    width: 200,
+  },
+  {
+    field: "createdAt",
+    headerName: "Created At",
+    width: 200,
+    type: "string",
+  },
+  {
+    field: "verified",
+    headerName: "Verified",
+    width: 150,
+    type: "boolean",
   },
   {
     field: "fullName",
@@ -57,10 +68,10 @@ const Users = () => {
     <div className="user">
       <div className="info">
         <h1>Users</h1>
-        <button onClick={()=>setOpen(true)}>Add New User</button>
+        <button onClick={() => setOpen(true)}>Add New User</button>
       </div>
-      <TableData slug="users" columns={columns} rows={userRows} />
-      {open && <AddModal slug="user" columns ={columns} setOpen={setOpen}/>}
+      <TableData slug="user" columns={columns} rows={userRows} />
+      {open && <AddModal slug="user" columns={columns} setOpen={setOpen} />}
     </div>
   );
 };
