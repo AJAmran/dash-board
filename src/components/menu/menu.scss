@@ -1,28 +1,36 @@
 @import "../../styles/variables.scss";
+@import "../../styles/responsive.scss";
 
-.menu{
-    .item{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 20px;
+.menu {
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: bold;
+    color: $secondary-text;
+    @include lg {
+      display: none;
     }
+  }
+  .listItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
 
-    .title{
-        font-size: 15px;
-        font-weight:bold;
-        color: $secondary-text;
+    &:hover {
+      background-color: $secondary-bg;
     }
-    .listItem{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px;
-        border-radius: 5px;
-
-        &:hover{
-            background-color: $secondary-bg;
-        }
-
+    .listItemTitle {
+      @include lg {
+        display: none;
+      }
     }
+  }
 }

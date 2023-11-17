@@ -1,3 +1,5 @@
+@import "../../styles/responsive.scss";
+
 .navbar {
   width: 100%;
   padding: 20px;
@@ -19,6 +21,9 @@
     .icon{
         height: 25px;
         width: 25px;
+        @include sm{
+          display: none;
+        }
     }
   }
   .notification {
