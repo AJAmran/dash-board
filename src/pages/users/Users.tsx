@@ -1,9 +1,9 @@
 import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import TableData from "../../components/tableData/TableData";
 import "./user.scss";
-import { userRows } from "../../utils/data/Data";
 import { useState } from "react";
 import AddModal from "../../components/addModal/AddModal";
+import { useQuery } from "@tanstack/react-query";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },
@@ -64,14 +64,27 @@ const columns: GridColDef[] = [
 
 const Users = () => {
   const [open, setOpen] = useState(false);
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["allusers"],
+    queryFn: () =>
+      fetch("https://admin-dash-board-server.vercel.app/api/users").then(
+        (res) => res.json()
+      ),
+  });
+
   return (
     <div className="user">
       <div className="info">
         <h1>Users</h1>
         <button onClick={() => setOpen(true)}>Add New User</button>
       </div>
-      <TableData slug="user" columns={columns} rows={userRows} />
-      {open && <AddModal slug="user" columns={columns} setOpen={setOpen} />}
+      {isLoading ? (
+        "Loading..."
+      ) : (
+        <TableData slug="users" columns={columns} rows={data} />
+      )}
+      {open && <AddModal slug="users" columns={columns} setOpen={setOpen} />}
     </div>
   );
 };

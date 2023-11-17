@@ -1,5 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import "./addModal.scss";
+import { useState } from "react";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 type Props = {
   slug: string;
@@ -8,14 +10,49 @@ type Props = {
 };
 
 const AddModal = (props: Props) => {
+  const queryClient = useQueryClient();
+  const [formData, setFormData] = useState<Record<string, string>>({});
   const handleColse = () => {
     props.setOpen(false);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const mutation = useMutation({
+    mutationFn: (newItem: Record<string, string>) => {
+      return fetch(
+        `https://admin-dash-board-server.vercel.app/api/${props.slug}`,
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: 111,
+            img: "",
+            lastName: "hello",
+            firstName: "Test",
+            email: "amran@gamil.com",
+            phone: "01888888",
+            createdAt: "02-80-2026",
+            verified: true,
+          }),
+        }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(`all${props.slug}`);
+    },
+  });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //todo add new item
-    //todo axios.post(`/api/${slug}s`)
+    mutation.mutate(formData);
+    props.setOpen(false);
   };
   return (
     <div className="add">
@@ -30,7 +67,13 @@ const AddModal = (props: Props) => {
             .map((column) => (
               <div className="item">
                 <label>{column.headerName}</label>
-                <input type={column.type} placeholder={column.field} />
+                <input
+                  type={column.type}
+                  name={column.field}
+                  placeholder={column.field}
+                  value={formData[column.field] || ""}
+                  onChange={handleChange}
+                />
               </div>
             ))}
           <button>Add</button>

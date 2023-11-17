@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import "./tableData.scss";
-import {
-  DataGrid,
-  GridColDef,
-  GridValueGetterParams,
-  GridToolbar,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   columns: GridColDef[];
@@ -14,8 +10,24 @@ type Props = {
 };
 
 const TableData = (props: Props) => {
-  const handleDelte = (id: number) => {
-    //api call
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (id: number) => {
+      return fetch(
+        `https://admin-dash-board-server.vercel.app/api/${props.slug}/${id}`,
+        {
+          method: "delete",
+        }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries([`all${props.slug}`]);
+    },
+  });
+
+  const handleDelete  = (id: number) => {
+    mutation.mutate(id);
     console.log(`${id} is deleted`);
   };
 
@@ -30,7 +42,7 @@ const TableData = (props: Props) => {
           <Link to={`/${props.slug}/${params.row.id}`}>
             <img src="/view.svg" alt="viewImage" />
           </Link>
-          <div className="delete" onClick={() => handleDelte(params.row.id)}>
+          <div className="delete" onClick={() => handleDelete (params.row.id)}>
             <img src="/delete.svg" alt="deleteImage" />
           </div>
         </div>
