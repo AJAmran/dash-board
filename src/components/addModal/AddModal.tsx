@@ -24,7 +24,7 @@ const AddModal = (props: Props) => {
   };
 
   const mutation = useMutation({
-    mutationFn: (newItem: Record<string, string>) => {
+    mutationFn: () => {
       return fetch(
         `https://admin-dash-board-server.vercel.app/api/${props.slug}`,
         {
@@ -45,13 +45,16 @@ const AddModal = (props: Props) => {
         }
       );
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(`all${props.slug}`);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [`all${props.slug}`],
+        refetchType: "active",
+      });
     },
   });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutation.mutate(formData);
+    mutation.mutate();
     props.setOpen(false);
   };
   return (

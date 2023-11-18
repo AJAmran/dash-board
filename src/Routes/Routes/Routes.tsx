@@ -6,6 +6,8 @@ import Main from "../../Layout/main/Main";
 import Login from "../../pages/login/Login";
 import SingleUser from "../../pages/singleUser/SingleUser";
 import SingleProduct from "../../pages/singleProduct/SingleProduct";
+import ProfilePage from "../../pages/userProfile/UserProfile";
+import OrdersPage from "../../pages/order/Order";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
         path: "/product/:id",
         element: <SingleProduct />,
       },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "/orders",
+        element:<OrdersPage></OrdersPage>
+      }
     ],
   },
   {

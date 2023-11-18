@@ -21,12 +21,15 @@ const TableData = (props: Props) => {
         }
       );
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries([`all${props.slug}`]);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [`all${props.slug}`],
+        refetchType: "active",
+      });
     },
   });
 
-  const handleDelete  = (id: number) => {
+  const handleDelete = (id: number) => {
     mutation.mutate(id);
     console.log(`${id} is deleted`);
   };
@@ -42,7 +45,7 @@ const TableData = (props: Props) => {
           <Link to={`/${props.slug}/${params.row.id}`}>
             <img src="/view.svg" alt="viewImage" />
           </Link>
-          <div className="delete" onClick={() => handleDelete (params.row.id)}>
+          <div className="delete" onClick={() => handleDelete(params.row.id)}>
             <img src="/delete.svg" alt="deleteImage" />
           </div>
         </div>
