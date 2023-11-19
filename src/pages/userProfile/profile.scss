@@ -1,6 +1,5 @@
-// ProfilePage.scss
-@import '../../styles/responsive.scss';
-@import '../../styles/global.scss';
+@import "../../styles/responsive.scss";
+@import "../../styles/global.scss";
 
 .profile-page {
   background-color: $primary-bg;
@@ -58,7 +57,7 @@
         border-radius: 5px;
         font-size: 14px;
         color: $primary-text;
-        background-color: transparent; // Set the input fill color to transparent
+        background-color: transparent;
         transition: border-color 0.3s;
 
         &:focus {
@@ -71,7 +70,6 @@
         margin-top: 0;
       }
 
-      // Style for the new password field
       &.new-password {
         color: $tertiary-text;
         font-size: 16px;
@@ -122,7 +120,7 @@
       border-radius: 5px;
       font-size: 14px;
       color: $primary-text;
-      background-color: transparent; // Set the input fill color to transparent
+      background-color: transparent;
       transition: border-color 0.3s;
 
       &:focus {
