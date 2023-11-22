@@ -22,9 +22,10 @@ Welcome to Amran Admin Dashboard – your go-to solution for modern, responsive 
 
 Check out the live demo [here](https://amran-admin-dashboard.netlify.app)!
 
+![Amran Admin Dashboard](https://ibb.co/ynn0dbY)
+
 ## Getting Started 🛠️
 
 1. Clone the repository.
    ```bash
-   git clone [[https://github.com/your-username/amran-admin-dashboard.git
-](https://github.com/AJAmran/dash-board.git)https://github.com/AJAmran/dash-board.git](https://github.com/AJAmran/dash-board.git)https://github.com/AJAmran/dash-board.git
+   git clone https://github.com/AJAmran/dash-board.git
