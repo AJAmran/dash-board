@@ -2,7 +2,7 @@
 
 Welcome to Amran Admin Dashboard – your go-to solution for modern, responsive admin interfaces! 
 
-![Amran Admin Dashboard](https://your-dashboard-image-link.com)
+![Amran Admin Dashboard]([https://your-dashboard-image-link.com](https://i.ibb.co/zhhsQ07/amran-admin-dashboard-netlify-app.png))
 
 ## Features 🌟
 
