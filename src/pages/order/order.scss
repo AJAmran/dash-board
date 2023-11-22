@@ -1,79 +1,124 @@
-.orders-page {
-  padding: 20px;
+@import "../../styles/global.scss";
+@import "../../styles/responsive.scss";
+@import "../../styles/variables.scss";
+
+.order-container {
+  font-family: "Inter", sans-serif;
+  color: $primary-text;
 
   h2 {
-    color: #1976d2;
+    color: $secondary-text;
     margin-bottom: 20px;
   }
 
-  .controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+  .MuiDataGrid-root {
+    border: 1px solid $secondary-bg;
+    background-color: #a5d7e8;
 
-    input {
+    .MuiDataGrid-cell {
+      padding: 10px;
+    }
+
+    .MuiDataGrid-row {
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: $tertiary-bg;
+      }
+    }
+
+    .MuiDataGrid-selected {
+      background-color: $tertiary-bg;
+    }
+  }
+
+  button {
+    padding: 8px;
+    background-color: $secondary-bg;
+    color: $primary-text;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $secondary-bg;
+    }
+  }
+
+  @include sm {
+    h2 {
+      font-size: 18px;
+    }
+
+    .MuiDataGrid-cell {
       padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
     }
 
     button {
-      color: #fff;
-      background-color: #1976d2;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 16px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #1565c0;
-      }
+      padding: 6px;
+      font-size: 14px;
     }
   }
 
-  .table-container {
-    margin-bottom: 20px;
+  @include md {
+    h2 {
+      font-size: 24px;
+    }
+
+    .MuiDataGrid-cell {
+      padding: 12px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
   }
 
-  .order-details-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  @include lg {
+    h2 {
+      font-size: 28px;
+    }
 
-    .modal-content {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      position: relative;
+    .MuiDataGrid-cell {
+      padding: 14px;
+    }
 
-      .close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 30px;
-        cursor: pointer;
-        color: #ffffff;
+    button {
+      padding: 12px;
+      font-size: 18px;
+    }
+  }
 
-        &:hover {
-          color: #555;
-        }
-      }
+  @include xl {
+    h2 {
+      font-size: 32px;
+    }
 
-      h3 {
-        color: #1976d2;
-        margin-bottom: 15px;
-      }
+    .MuiDataGrid-cell {
+      padding: 16px;
+    }
 
-      p {
-        margin: 5px 0;
-      }
+    button {
+      padding: 14px;
+      font-size: 20px;
+    }
+  }
 
-      img {
-        max-width: 100%;
-        height: auto;
-        margin-top: 10px;
-      }
+  @include xxl {
+    h2 {
+      font-size: 36px;
+    }
+
+    .MuiDataGrid-cell {
+      padding: 18px;
+    }
+
+    button {
+      padding: 16px;
+      font-size: 22px;
     }
   }
 }

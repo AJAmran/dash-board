@@ -15,9 +15,6 @@
   }
 
   .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-bottom: 20px;
 
     .profile-picture {
@@ -29,7 +26,7 @@
     }
 
     .user-details {
-      text-align: center;
+      text-align: start;
       color: $primary-text;
 
       p {
@@ -95,54 +92,56 @@
     }
   }
 
-  .change-password {
-    margin-top: 20px;
-    width: 100%;
-    max-width: 500px;
-
-    h3 {
-      color: $secondary-text;
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-      color: $tertiary-text;
-    }
-
-    input {
+  .new-password-container{
+    .change-password {
+      margin-top: 20px;
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      box-sizing: border-box;
-      border: 1px solid $tertiary-bg;
-      border-radius: 5px;
-      font-size: 14px;
-      color: $primary-text;
-      background-color: transparent;
-      transition: border-color 0.3s;
-
-      &:focus {
-        outline: none;
-        border-color: $secondary-bg;
+      max-width: 500px;
+  
+      h3 {
+        color: $secondary-text;
+        margin-bottom: 15px;
       }
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      background-color: $tertiary-bg;
-      color: $primary-text;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: $secondary-bg;
+  
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: $tertiary-text;
+      }
+  
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        box-sizing: border-box;
+        border: 1px solid $tertiary-bg;
+        border-radius: 5px;
+        font-size: 14px;
+        color: $primary-text;
+        background-color: transparent;
+        transition: border-color 0.3s;
+  
+        &:focus {
+          outline: none;
+          border-color: $secondary-bg;
+        }
+      }
+  
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background-color: $tertiary-bg;
+        color: $primary-text;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+  
+        &:hover {
+          background-color: $secondary-bg;
+        }
       }
     }
   }

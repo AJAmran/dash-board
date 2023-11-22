@@ -8,6 +8,8 @@ import SingleUser from "../../pages/singleUser/SingleUser";
 import SingleProduct from "../../pages/singleProduct/SingleProduct";
 import ProfilePage from "../../pages/userProfile/UserProfile";
 import OrdersPage from "../../pages/order/Order";
+import PostPage from "../../pages/posts/Post";
+import CalendarPage from "../../pages/calendarPage/CalendarPage";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +42,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/orders",
-        element:<OrdersPage></OrdersPage>
+        element: <OrdersPage />,
+      },
+      {
+        path: "/posts",
+        element: <PostPage />,
+      },
+      {
+        path: "/calender",
+        element: <CalendarPage />
       }
     ],
   },

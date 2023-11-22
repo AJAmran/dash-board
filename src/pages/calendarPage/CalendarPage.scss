@@ -1,0 +1,73 @@
+@import '../../styles/global.scss';
+
+.calendar-page {
+  h2 {
+    color: $secondary-text;
+    margin-bottom: 20px;
+  }
+
+  .rbc-calendar {
+    height: 500px; // Set a fixed height for the calendar container
+    background-color: $primary-bg;
+    color: $primary-text;
+    border: 1px solid #19376d;
+    border-radius: 5px;
+    overflow: hidden;
+
+    .rbc-month-view {
+      background-color: transparent;
+
+      .rbc-header + .rbc-header {
+        border-left: 1px solid #19376d;
+      }
+
+      .rbc-row-content {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+      }
+
+      .rbc-row {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .rbc-date-cell {
+        padding: 15px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &.rbc-now {
+          background-color: #19376d;
+          color: #ffffff;
+          border-radius: 5px;
+        }
+
+        .rbc-day-bg {
+          display: none;
+        }
+      }
+
+      .rbc-event {
+        background-color: #19376d;
+        color: #ffffff;
+        border-radius: 5px;
+        padding: 2px 5px;
+        font-size: 14px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-top: 5px;
+      }
+    }
+  }
+  .rbc-toolbar{
+    .rbc-btn-group{
+        button{
+            color: #ffffff;
+        }
+    }
+  }
+}

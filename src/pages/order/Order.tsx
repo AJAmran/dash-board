@@ -1,138 +1,69 @@
-// OrdersPage.tsx
-import React, { useState } from 'react';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Modal, Backdrop, Fade } from '@mui/material';
+import { useState } from 'react';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import CustomModal from '../../components/orderModal/CustomModal';
 import './order.scss';
 
 interface Order {
   id: number;
   customerName: string;
   product: string;
-  productImage: string;
+  image: string;
   quantity: number;
   total: number;
   status: string;
 }
 
-const demoOrders: Order[] = [
-  { id: 1, customerName: 'John Doe', product: 'Widget A', productImage: 'https://via.placeholder.com/50', quantity: 2, total: 100, status: 'Shipped' },
-  { id: 2, customerName: 'Jane Smith', product: 'Widget B', productImage: 'https://via.placeholder.com/50', quantity: 1, total: 50, status: 'Processing' },
-  // Add more demo orders as needed
-];
-
-const OrdersPage: React.FC = () => {
-  const [orders, setOrders] = useState<Order[]>(demoOrders);
+const OrderPage: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOrderClick = (order: Order) => {
+  const handleOpenModal = (order: Order) => {
     setSelectedOrder(order);
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setSelectedOrder(null);
+    setIsModalOpen(false);
   };
 
-  const handleSortBy = (field: keyof Order) => {
-    const sortedOrders = [...orders].sort((a, b) => a[field] - b[field]);
-    setOrders(sortedOrders);
-  };
+  const orders: Order[] = [
+    { id: 1, customerName: 'John Doe', product: 'Product A', image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6m9-djFU2JzngXU_EbECeZSPcEaRW9ciLHChwkpl6&s", quantity: 2,  total: 50, status: 'Pending' },
+    { id: 2, customerName: 'Jane Smith', product: 'Product B', image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6m9-djFU2JzngXU_EbECeZSPcEaRW9ciLHChwkpl6&s", quantity: 1, total: 30, status: 'Delivered' },
+  ];
 
-  const handleFilterByCustomer = (customerName: string) => {
-    const filteredOrders = demoOrders.filter(
-      (order) => order.customerName.toLowerCase().includes(customerName.toLowerCase())
-    );
-    setOrders(filteredOrders);
-  };
-
-  const resetOrders = () => {
-    setOrders(demoOrders);
-  };
+  const columns: GridColDef[] = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'customerName', headerName: 'Customer Name', width: 200 },
+    { field: 'product', headerName: 'Product', width: 150 },
+    { field: 'image', headerName: 'Image', width: 120, renderCell: (params) => <img src={params.value} alt="Product" style={{ width: '50px', height: '50px' }} /> },
+    { field: 'quantity', headerName: 'Quantity', width: 120 },
+    { field: 'total', headerName: 'Total', width: 120 },
+    { field: 'status', headerName: 'Status', width: 120 },
+    {
+      field: 'action',
+      headerName: 'Action',
+      width: 150,
+      renderCell: (params) => (
+        <button onClick={() => handleOpenModal(params.row as Order)}>View Details</button>
+      ),
+    },
+  ];
 
   return (
-    <div className="orders-page">
-      <h2>Orders</h2>
-
-      <div className="controls">
-        <Button variant="outlined" onClick={() => handleSortBy('customerName')}>
-          Sort by Customer
-        </Button>
-        <input
-          type="text"
-          placeholder="Filter by Customer"
-          onChange={(e) => handleFilterByCustomer(e.target.value)}
+    <div className="order-container">
+      <h2>Your Orders</h2>
+      <div style={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={orders}
+          columns={columns}
+          checkboxSelection
         />
-        <Button variant="outlined" onClick={resetOrders}>
-          Reset Orders
-        </Button>
       </div>
 
-      <TableContainer component={Paper} className="table-container">
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Customer Name</TableCell>
-              <TableCell>Product</TableCell>
-              <TableCell>Product Image</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell>Total</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {orders.map((order) => (
-              <TableRow key={order.id}>
-                <TableCell>{order.id}</TableCell>
-                <TableCell>{order.customerName}</TableCell>
-                <TableCell>{order.product}</TableCell>
-                <TableCell>
-                  <img src={order.productImage} alt={`Product ${order.product}`} onClick={() => handleOrderClick(order)} />
-                </TableCell>
-                <TableCell>{order.quantity}</TableCell>
-                <TableCell>{order.total}</TableCell>
-                <TableCell>{order.status}</TableCell>
-                <TableCell>
-                  <Button onClick={() => handleOrderClick(order)}>View Details</Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      <Modal
-        open={Boolean(selectedOrder)}
-        onClose={handleCloseModal}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-          style: { backgroundColor: '#02030476' }, // Modal background color
-        }}
-      >
-        <Fade in={Boolean(selectedOrder)}>
-          <div className="order-details-modal">
-            <div className="modal-content">
-              <span className="close" onClick={handleCloseModal}>
-                &times;
-              </span>
-              <h3>Order Details</h3>
-              <p>ID: {selectedOrder?.id}</p>
-              <p>Customer Name: {selectedOrder?.customerName}</p>
-              <p>Product: {selectedOrder?.product}</p>
-              <p>
-                Product Image:
-                <img src={selectedOrder?.productImage} alt={`Product ${selectedOrder?.product}`} />
-              </p>
-              <p>Quantity: {selectedOrder?.quantity}</p>
-              <p>Total: {selectedOrder?.total}</p>
-              <p>Status: {selectedOrder?.status}</p>
-            </div>
-          </div>
-        </Fade>
-      </Modal>
+      <CustomModal open={isModalOpen} onClose={handleCloseModal} selectedOrder={selectedOrder} />
     </div>
   );
 };
 
-export default OrdersPage;
+export default OrderPage;

@@ -72,7 +72,7 @@ export const menu = [
       {
         id: 4,
         title: "Calendar",
-        url: "/",
+        url: "/calender",
         icon: "calendar.svg",
       },
     ],
